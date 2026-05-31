@@ -1,0 +1,34 @@
+<h2 mat-dialog-title> {{ data ? 'Editar Insumo' : 'Crear Insumo'}} </h2>
+
+<mat-dialog-content>
+  <div class="form-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="insumo.nombre" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Precio por unidad</mat-label>
+      <input matInput type="number" [(ngModel)]="insumo.precioPorUnidad" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Unidad de medida</mat-label>
+      <mat-select [(ngModel)]="insumo.unidadMedida">
+        @for (unidad of unidades; track unidad) {
+          <mat-option [value]="unidad">{{ unidad }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Stock mínimo</mat-label>
+      <input matInput type="number" [(ngModel)]="insumo.stockMinimo" />
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-flat-button class="btn-primary" (click)="guardar()">Guardar</button>
+</mat-dialog-actions>

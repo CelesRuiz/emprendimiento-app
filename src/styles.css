@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f5f0e8;
+}
+
+.mat-mdc-form-field {
+    width: 100%;
+}
+
+.mat-toolbar {
+    background-color: #ffffff !important;
+    color: #4a4a4a !important;
+}

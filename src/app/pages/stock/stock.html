@@ -1,0 +1,68 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Stock</h1>
+    <button mat-flat-button class="btn-primary">
+      <mat-icon>add</mat-icon>
+      Registrar producción
+    </button>
+  </div>
+
+  @if (!productoSeleccionado) {
+    <div class="cards-grid">
+      @for (p of stockProductos(); track p.productoId) {
+        <mat-card class="stock-card" (click)="verMovimientos(p)" [class.stock-bajo]="esBajoStock(p)">
+          <mat-card-content>
+            <p class="producto-nombre">{{ p.nombre }}</p>
+            <p class="stock-actual">{{ p.stockActual }}</p>
+            <p class="stock-minimo">Mínimo: {{ p.stockMinimo }}</p>
+            @if (esBajoStock(p)) {
+              <span class="badge-bajo">⚠️ Stock bajo</span>
+            }
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+
+  @if (productoSeleccionado) {
+    <div class="detalle-header">
+      <button mat-icon-button (click)="productoSeleccionado = null">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>{{ productoSeleccionado.nombre }}</h2>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Filtrar por tipo</mat-label>
+      <mat-select [(ngModel)]="filtroTipo" (ngModelChange)="verMovimientos(productoSeleccionado)">
+        @for (tipo of tiposMovimiento; track tipo.etiqueta) {
+          <mat-option [value]="tipo.valor">{{ tipo.etiqueta }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="movimientos()" class="tabla-stock">
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef>Fecha</th>
+        <td mat-cell *matCellDef="let m">{{ m.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+        <td mat-cell *matCellDef="let m">
+          <span [class]="m.tipo === 0 ? 'badge-produccion' : 'badge-venta'">
+            {{ getTipoLabel(m.tipo) }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cantidad">
+        <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+        <td mat-cell *matCellDef="let m">{{ m.cantidad }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+    </table>
+  }
+</div>

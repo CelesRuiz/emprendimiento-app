@@ -1,0 +1,50 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header h1 {
+    font-family: 'Playfair Display', serif;
+    color: #4a4a4a;
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.tabla-insumos {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0d8d0;
+}
+
+.tabla-insumos th {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #8a8a8a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tabla-insumos td {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    color: #4a4a4a;
+}
+
+.btn-primary {
+    background-color: #4a9b8e !important;
+    color: #ffffff !important;
+}
+
+.mat-mdc-form-field {
+    width: 300px;
+}

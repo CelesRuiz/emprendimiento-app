@@ -1,0 +1,75 @@
+.sidenav-container {
+    height: 100vh;
+}
+
+.sidenav {
+    width: 240px;
+    background-color: #f5f0e8;
+    border-right: 1px solid #e0d8d0;
+}
+
+.brand {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e0d8d0;
+}
+
+.brand h2 {
+    font-family: 'Playfair Display', serif;
+    color: #4a9b8e;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0d8d0;
+    color: #4a4a4a;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.user-name {
+    font-size: 0.9rem;
+    color: #8a8a8a;
+    margin-right: 0.5rem;
+}
+
+.content {
+    padding: 2rem;
+    background-color: #f5f0e8;
+    min-height: calc(100vh - 64px);
+}
+
+.active-link {
+    background-color: #e0f0ee !important;
+    color: #4a9b8e !important;
+}
+
+.user-menu-btn {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px;
+    height: 48px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #4a9b8e;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.user-menu-btn .mat-icon {
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+}

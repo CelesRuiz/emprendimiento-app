@@ -1,0 +1,122 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header h1 {
+    font-family: 'Playfair Display', serif;
+    color: #4a4a4a;
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.stock-card {
+    cursor: pointer;
+    border: 1px solid #e0d8d0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stock-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stock-bajo {
+    border-left: 4px solid #e8a0a0 !important;
+}
+
+.producto-nombre {
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    color: #4a4a4a;
+    margin: 0 0 8px;
+}
+
+.stock-actual {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4a9b8e;
+    margin: 0;
+}
+
+.stock-minimo {
+    font-size: 0.8rem;
+    color: #8a8a8a;
+    margin: 4px 0;
+}
+
+.badge-bajo {
+    font-size: 0.75rem;
+    color: #e8a0a0;
+}
+
+.detalle-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detalle-header h2 {
+    font-family: 'Playfair Display', serif;
+    color: #4a4a4a;
+    margin: 0;
+}
+
+.tabla-stock {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0d8d0;
+}
+
+.tabla-stock th {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #8a8a8a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tabla-stock td {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    color: #4a4a4a;
+}
+
+.badge-produccion {
+    background-color: #d4edda;
+    color: #2d6a4f;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.badge-venta {
+    background-color: #fde8d8;
+    color: #9c4a1a;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #4a9b8e !important;
+    color: #ffffff !important;
+}
