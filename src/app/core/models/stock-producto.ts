@@ -3,4 +3,7 @@ export interface StockProducto {
   nombre: string;
   stockActual: number;
   stockMinimo: number;
+  esStockBajo: boolean;
+  diasMaxFrescura: number;
+  ultimaProduccion: string | null;
 }

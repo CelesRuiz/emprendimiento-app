@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Registrar salida de {{ data.nombreProducto }}</h2>
+
+<mat-dialog-content>
+  <div class="form-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Motivo</mat-label>
+      <mat-select [(ngModel)]="motivoSalida">
+        @for (m of motivos; track m.valor) {
+          <mat-option [value]="m.valor">{{ m.etiqueta }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Cantidad</mat-label>
+      <input matInput type="number" [(ngModel)]="cantidad" min="1" />
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-flat-button class="btn-primary" (click)="guardar()">Registrar</button>
+</mat-dialog-actions>

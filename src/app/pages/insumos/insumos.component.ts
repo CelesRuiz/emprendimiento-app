@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InsumoDialogComponent } from './insumo-dialog/insumo-dialog.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-insumos',
@@ -23,6 +24,7 @@ import { InsumoDialogComponent } from './insumo-dialog/insumo-dialog.component';
     FormsModule,
     DatePipe,
     MatDialogModule,
+    MatMenuModule,
   ],
   templateUrl: './insumos.html',
   styleUrl: './insumos.css',

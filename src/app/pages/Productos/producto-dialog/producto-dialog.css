@@ -1,0 +1,12 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    min-width: 400px;
+}
+
+.btn-primary {
+    background-color: #4a9b8e !important;
+    color: #ffffff !important;
+}

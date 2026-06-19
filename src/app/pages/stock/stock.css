@@ -120,3 +120,168 @@
     background-color: #4a9b8e !important;
     color: #ffffff !important;
 }
+
+.filtros-fecha {
+    display: flex;
+    gap: 1rem;
+}
+
+.input-fecha {
+    border: 1px solid #e0d8d0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    color: #4a4a4a;
+    background-color: #ffffff;
+}
+
+.badge-vencimiento {
+    background-color: #ffe4d4;
+    color: #c47236;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.badge-descarte {
+    background-color: #f5d4d4;
+    color: #a04545;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.badge-vencido {
+    font-size: 0.75rem;
+    color: #c47236;
+    display: block;
+    margin-top: 4px;
+}
+
+.badge-anulacion {
+    background-color: #e8d4f5;
+    color: #6b3fa0;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.lotes-section {
+    margin-bottom: 2rem;
+}
+
+.lotes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.lotes-header h3 {
+    font-family: 'Playfair Display', serif;
+    color: #4a4a4a;
+    margin: 0;
+}
+
+.lotes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.lote-card {
+    background-color: #ffffff;
+    border: 1px solid #e0d8d0;
+    border-radius: 8px;
+}
+
+.lote-card mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-top: 1rem;
+}
+
+.lote-fecha,
+.lote-vencimiento {
+    font-size: 0.85rem;
+    color: #8a8a8a;
+}
+
+.lote-cantidad {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4a4a4a;
+}
+
+.lote-anulado {
+    opacity: 0.5;
+}
+
+.badge-activo {
+    background-color: #d4ebe6;
+    color: #2d6e62;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+.badge-porvencer {
+    background-color: #fff3d4;
+    color: #8a6d20;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+.badge-vencido {
+    background-color: #f5d4d4;
+    color: #a04545;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+.badge-anulado {
+    background-color: #e8d4f5;
+    color: #6b3fa0;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+.detalle-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.detalle-header h2 {
+    flex: 1;
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    color: #4a4a4a;
+}
+
+.btn-salida {
+    background-color: #c47236 !important;
+    color: #ffffff !important;
+}
+
+.header-actions {
+    display: flex;
+    gap: 0.5rem;
+}

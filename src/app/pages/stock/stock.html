@@ -1,11 +1,18 @@
-<div class="page-container">
-  <div class="page-header">
-    <h1>Stock</h1>
-    <button mat-flat-button class="btn-primary">
+<div class="page-header">
+  <h1>Stock</h1>
+  <div class="header-actions">
+    <button mat-flat-button class="btn-primary" (click)="abrirProduccionDialog()">
       <mat-icon>add</mat-icon>
       Registrar producción
     </button>
+    @if (productoSeleccionado) {
+      <button mat-flat-button class="btn-salida" (click)="abrirSalidaDialog()">
+        <mat-icon>remove_circle_outline</mat-icon>
+        Registrar salida
+      </button>
+    }
   </div>
+</div>
 
   @if (!productoSeleccionado) {
     <div class="cards-grid">
@@ -16,8 +23,11 @@
             <p class="stock-actual">{{ p.stockActual }}</p>
             <p class="stock-minimo">Mínimo: {{ p.stockMinimo }}</p>
             @if (esBajoStock(p)) {
-              <span class="badge-bajo">⚠️ Stock bajo</span>
+              <span class="badge-bajo">Stock bajo</span>
             }
+            @if (estaPosiblementeVencido(p)) {
+              <span class="badge-vencido">Posiblemente vencido</span>
+}
           </mat-card-content>
         </mat-card>
       }
@@ -26,20 +36,64 @@
 
   @if (productoSeleccionado) {
     <div class="detalle-header">
-      <button mat-icon-button (click)="productoSeleccionado = null">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-      <h2>{{ productoSeleccionado.nombre }}</h2>
-    </div>
+  <button mat-icon-button (click)="productoSeleccionado = null">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h2>{{ productoSeleccionado.nombre }}</h2>
+</div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Filtrar por tipo</mat-label>
-      <mat-select [(ngModel)]="filtroTipo" (ngModelChange)="verMovimientos(productoSeleccionado)">
-        @for (tipo of tiposMovimiento; track tipo.etiqueta) {
-          <mat-option [value]="tipo.valor">{{ tipo.etiqueta }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+  <div class="lotes-section">
+  <div class="lotes-header">
+    <h3>Lotes del producto</h3>
+    <mat-slide-toggle [(ngModel)]="verHistorial" (ngModelChange)="cargarLotes()">
+      Ver historial completo
+    </mat-slide-toggle>
+  </div>
+
+  <div class="lotes-grid">
+    @for (lote of lotes(); track lote.id) {
+      <mat-card class="lote-card" [class.lote-anulado]="lote.estaAnulado">
+        <mat-card-content>
+          <div class="lote-fecha">
+            Producido: {{ lote.fecha | date:'dd/MM/yyyy' }}
+          </div>
+          <div class="lote-cantidad">
+            {{ lote.cantidadActual }} / {{ lote.cantidad }} unidades
+          </div>
+          @if (lote.fechaVencimiento) {
+            <div class="lote-vencimiento">
+              Vence: {{ lote.fechaVencimiento | date:'dd/MM/yyyy' }}
+            </div>
+          }
+          <span [class]="'badge-' + lote.estado.toLowerCase()">
+            {{ lote.estado === 'PorVencer' ? 'Por vencer' : lote.estado }}
+          </span>
+          @if (lote.estaAnulado) {
+            <span class="badge-anulado">Anulado</span>
+          }
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+</div>
+
+
+<mat-form-field appearance="outline">
+  <mat-label>Filtrar movimientos</mat-label>
+  <mat-select [(ngModel)]="filtroSeleccionado" (ngModelChange)="verMovimientos(productoSeleccionado!)">
+    @for (tipo of tiposMovimiento; track tipo.etiqueta) {
+      <mat-option [value]="tipo.valor">{{ tipo.etiqueta }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+<div class="filtros-fecha">
+  <label>Desde</label>
+  <input type="date" [(ngModel)]="filtroDesde" (ngModelChange)="verMovimientos(productoSeleccionado!)" class="input-fecha" />
+  
+  <label>Hasta</label>
+  <input type="date" [(ngModel)]="filtroHasta" (ngModelChange)="verMovimientos(productoSeleccionado!)" class="input-fecha" />
+</div>
 
     <table mat-table [dataSource]="movimientos()" class="tabla-stock">
       <ng-container matColumnDef="fecha">
@@ -47,22 +101,38 @@
         <td mat-cell *matCellDef="let m">{{ m.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="tipo">
-        <th mat-header-cell *matHeaderCellDef>Tipo</th>
-        <td mat-cell *matCellDef="let m">
-          <span [class]="m.tipo === 0 ? 'badge-produccion' : 'badge-venta'">
-            {{ getTipoLabel(m.tipo) }}
-          </span>
-        </td>
-      </ng-container>
+<ng-container matColumnDef="tipo">
+  <th mat-header-cell *matHeaderCellDef>Tipo</th>
+  <td mat-cell *matCellDef="let m">
+    <span [class]="getBadgeClass(m)">
+      {{ getMovimientoLabel(m) }}
+    </span>
+  </td>
+</ng-container>
 
-      <ng-container matColumnDef="cantidad">
-        <th mat-header-cell *matHeaderCellDef>Cantidad</th>
-        <td mat-cell *matCellDef="let m">{{ m.cantidad }}</td>
-      </ng-container>
+   <ng-container matColumnDef="cantidad">
+  <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+  <td mat-cell *matCellDef="let m">{{ m.cantidad }}</td>
+</ng-container>
+
+<ng-container matColumnDef="acciones">
+  <th mat-header-cell *matHeaderCellDef></th>
+  <td mat-cell *matCellDef="let m">
+    @if (!m.estaAnulado) {
+      <button mat-icon-button [matMenuTriggerFor]="menuAcciones">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menuAcciones="matMenu">
+        <button mat-menu-item (click)="anularMovimiento(m.id)">
+          <mat-icon color="warn">undo</mat-icon>
+          <span>Anular</span>
+        </button>
+      </mat-menu>
+    }
+  </td>
+</ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columnas"></tr>
       <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
     </table>
   }
-</div>
